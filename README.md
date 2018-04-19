@@ -285,3 +285,93 @@ go to the project directory. Run 'mvn spring-boot:run'
 Use Postman again to test your end point
 
 ## Part 3 - Deployment
+
+### RDS setup
+1. login to Amazon
+2. Go to the RDS Dashboard
+3. Click on the 'Launch a DB Instance'
+4. Select MySQL
+5. Select Dev/Test as a plan. Click next step
+6. select t2.micro for your db instance class
+7. define instance name, username and password. click next step
+8. add a name for an initial database or you can create this later by loging into the server and create it manually
+9. Click launch DB
+
+### Connect Remotely
+Change security group settings to except outside connections
+1. click RDS instance, go to the details sections and click on the active securtity group.
+2. edit the inbound rules and set source to 'anywhere'
+3. also make note of the endpoint address located in the Connect section of the DB instance info page. We will need this to connect
+4. User terminal to connect to the db server
+```
+mysql -h spring-aws-2.csnytahssyjo.us-east-1.rds.amazonaws.com -u dbuser -p
+```
+substitute the address after the -h (host) flag to your instance address
+
+5. go to your new database and add the user table/database
+```
+CREATE TABLE `user` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`first_name` varchar(11) DEFAULT NULL,
+`last_name` varchar(11) DEFAULT NULL,
+`username` varchar(11) DEFAULT NULL,
+`created` datetime DEFAULT NULL,
+`updated` datetime DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `user` WRITE;
+
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `username`, `created`, `updated`)
+VALUES
+(1,'Bruce','Banner','test','2017-02-22 00:00:00','2017-02-22 00:00:00');
+```
+
+### Confugure the Spring Boot Application
+We need to point our app to the remote database instead of our own.
+1. Open the application.properties file and change datasource.url
+```
+spring.datasource.url=jdbc:mysql://db-server-instance-name.***********.us-east-2.rds.amazonaws.com:3306/db-name
+spring.datasource.username=remoteUserName
+spring.datasource.password=remotePassword
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+spring.jpa.hibernate.ddl-auto=update
+```
+2. build jar file
+```
+mvn clean install
+```
+
+### Create an EC@ instance and deploy it
+1. go to AWS console. Select the EC2 service
+2. select instances, click on launch instance. Select Ubuntu
+3. select free tier eligible instance and launch it
+4. During the launch it will ask about security keys. Select create a new key pair and give it a good name 'springdemo' or something. download the key
+5. rename the key filename.pem (<-filename is whatever you name the key)
+6. in terminal `chmod 400 filename.pem` so we have proper permissions
+7. Click the connect button with your instance selected
+```
+ssh -i "filename.pem" ec2-user@ec2-**********.us-east-1.compute.amazonaws.com
+```
+8. update Ubuntu `apt-get update`
+9. check available java versions `java -versions`
+10. install java 8 `sudo apt install default-jre`
+11. Next thing is, upload the jar file into the ec2. Use terminal or a ftp program of your choice
+12. Create a new directory inside ‘home/ubuntu‘. The directory name is ‘spring-app‘.
+13. Upload the jar file that contains under the ‘target‘ directory into the ‘home/ubuntu/spring-app‘
+14. While uploading, open 8080 port for outside the world. Select the ‘Security Group‘ of the instance and add an outbound rule opening port 8080
+15.  Finally, following command can be used to run the REST service.
+
+`nohup java -jar spring-boot-1.0-SNAPSHOT.jar &`
+
+`nohup` – use for terminal output goes into the nohup.out file.
+
+`&` – use for running as a background service. So that terminal is free to do another work.
+
+### Test it
+We can check whether the application is running or not look at the nohup.out file. Use the following command to check the nohup.out.
+
+`less nohup.out`
+
+When you click on the EC2 instance, you will be able to find the ‘IPv4 Public IP‘ that IP can be used to send a REST request using Postman
