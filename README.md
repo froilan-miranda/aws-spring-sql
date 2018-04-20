@@ -13,7 +13,7 @@ Create a new Maven project
 ### Step 2
 Create the following folder structure. Create empty classes for now. We will address them soon
 
-![](aws-spring-sql/images/package-structure.png)
+![](http://aws-spring-sql/images/package-structure.png)
 
 ### Step 3
 Update the pom.xml file to the following
