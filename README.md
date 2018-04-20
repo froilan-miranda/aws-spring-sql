@@ -12,7 +12,7 @@ Create a new Maven project
 
 ### Step 2
 Create the following folder structure. Create empty classes for now. We will address them soon
-![](http://path/to/image);
+![](https://github.com/froilan-miranda/aws-spring-sql/images/package-structure.png);
 
 ### Step 3
 Update the pom.xml file to the following
@@ -108,7 +108,7 @@ mvn package && java -jar target/spring-boot-1.0-SNAPSHOT.jar
 
 Use Postman to test REST api endpoint
 'http://localhost:8080/'
-![](http://path/to/image)
+![](https://github.com/froilan-miranda/aws-spring-sql/images/postman-response.png)
 
 
 ## Part 2 - The Model
@@ -165,7 +165,7 @@ Add the mysql and jpa dependencies to our pom.xml file
 ### Step 4
 Add some more packages for later and a 'application.properties' file inside the resources folder
 
-![](http://path/to/image)
+![](https://github.com/froilan-miranda/aws-spring-sql/images/package-structure-2.png)
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/spring_aws?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 spring.datasource.username=root
@@ -352,7 +352,7 @@ mvn clean install
 6. in terminal `chmod 400 filename.pem` so we have proper permissions
 7. Click the connect button with your instance selected
 ```
-ssh -i "filename.pem" ec2-user@ec2-**********.us-east-1.compute.amazonaws.com
+ssh -i "filename.pem" ubuntu@ec2-**********.us-east-1.compute.amazonaws.com
 ```
 8. update Ubuntu `apt-get update`
 9. check available java versions `java -versions`
