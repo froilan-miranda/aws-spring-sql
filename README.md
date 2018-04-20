@@ -13,7 +13,7 @@ Create a new Maven project
 ### Step 2
 Create the following folder structure. Create empty classes for now. We will address them soon
 
-![](![alt text](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.png)
+![](![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.png)
 
 ### Step 3
 Update the pom.xml file to the following
@@ -109,7 +109,7 @@ mvn package && java -jar target/spring-boot-1.0-SNAPSHOT.jar
 
 Use Postman to test REST api endpoint
 'http://localhost:8080/'
-![](https://github.com/froilan-miranda/aws-spring-sql/images/postman-response.png)
+![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.pngpostman-response.png)
 
 
 ## Part 2 - The Model
@@ -166,7 +166,7 @@ Add the mysql and jpa dependencies to our pom.xml file
 ### Step 4
 Add some more packages for later and a 'application.properties' file inside the resources folder
 
-![](https://github.com/froilan-miranda/aws-spring-sql/images/package-structure-2.png)
+![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.pngpackage-structure-2.png)
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/spring_aws?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 spring.datasource.username=root
