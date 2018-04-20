@@ -351,7 +351,7 @@ mvn clean install
 4. During the launch it will ask about security keys. Select create a new key pair and give it a good name 'springdemo' or something. download the key
 5. rename the key filename.pem (<-filename is whatever you name the key)
 6. in terminal `chmod 400 filename.pem` so we have proper permissions
-7. Click the connect button with your instance selected
+7. Click the connect button with your instance selected. A popup windown with show you the following code that you can use to log into the ec2 instance
 ```
 ssh -i "filename.pem" ubuntu@ec2-**********.us-east-1.compute.amazonaws.com
 ```
