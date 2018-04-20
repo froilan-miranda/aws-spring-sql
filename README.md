@@ -109,7 +109,7 @@ mvn package && java -jar target/spring-boot-1.0-SNAPSHOT.jar
 
 Use Postman to test REST api endpoint
 'http://localhost:8080/'
-![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.pngpostman-response.png)
+![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/postman-response.png)
 
 
 ## Part 2 - The Model
@@ -166,7 +166,7 @@ Add the mysql and jpa dependencies to our pom.xml file
 ### Step 4
 Add some more packages for later and a 'application.properties' file inside the resources folder
 
-![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure.pngpackage-structure-2.png)
+![](https://raw.githubusercontent.com/froilan-miranda/aws-spring-sql/master/images/package-structure-2.png)
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/spring_aws?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 spring.datasource.username=root
